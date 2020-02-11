@@ -10,9 +10,18 @@ spring:
           lower-case-service-id: true
       routes:
         - id: blog
-          uri: http://blog.yuqiyu.com
+          uri: http://localhost:5502
           predicates:
-            - Path=/api-boot-datasource-switch.html
+            - Path=/client
+          filters:
+            - JwtCheck
+
+        - id: v1
+          uri: http://47.104.244.171:8080/gas-web/device/list
+          predicates:
+            - Path=/gas-web/device/list
+          filters:
+            - JwtCheck
 
 server:
   port: 5555
@@ -20,9 +29,22 @@ eureka:
   client:
     service-url:
       defaultZone: http://localhost:5761/eureka/
-security:
-  basic:
-    enabled: false
+#security:
+#  basic:
+#    enabled: false
 logging:
   level:
     org.springframework.cloud.gateway: debug
+
+# hystrix 信号量隔离，3秒后自动超时
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          strategy: SEMAPHORE
+          thread:
+            timeoutInMilliseconds: 3000
+  shareSecurityContext: true
+
+

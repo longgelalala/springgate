@@ -13,6 +13,8 @@
         <module>gate-gateway</module>
         <module>gate-service</module>
         <module>gate-client</module>
+        <module>gate-dynamic-router</module>
+        <module>gate-mockserver</module>
     </modules>
 
 

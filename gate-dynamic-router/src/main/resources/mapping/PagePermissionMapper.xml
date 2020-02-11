@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zypcy.springcloud.dynamicroute.respository.PagePermissionDefinitionMapper">
+    <resultMap id="BaseResultMap" type="com.zypcy.springcloud.dynamicroute.entity.PagePermission">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="routeId" jdbcType="VARCHAR" property="routeId"/>
+        <result column="role" jdbcType="VARCHAR" property="role"/>
+        <result column="permission_value" jdbcType="VARCHAR" property="permissionValue"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, create_time, routeId, role, permission_value
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from page_permissions
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+
+    <select id="selectByRouteId" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from page_permissions
+        where routeId = #{routeId,jdbcType=VARCHAR}
+    </select>
+
+    <select id="selectByRouteIdAndRole" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from page_permissions
+        where routeId = #{routeId,jdbcType=VARCHAR} and role = #{role,jdbcType=VARCHAR}
+    </select>
+
+
+    <select id="listAll" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from page_permissions
+        order by id desc
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        delete from page_permissions
+        where id = #{id,jdbcType=BIGINT}
+    </delete>
+
+    <insert id="insertSelective" parameterType="com.zypcy.springcloud.dynamicroute.entity.PagePermission">
+        insert into page_permissions
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="routeId != null">
+                routeId,
+            </if>
+            <if test="role != null">
+                role,
+            </if>
+            <if test="permissionValue != null">
+                permission_value,
+            </if>
+
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+
+            <if test="routeId != null">
+                #{routeId,jdbcType=VARCHAR},
+            </if>
+            <if test="role != null">
+                #{role,jdbcType=VARCHAR},
+            </if>
+            <if test="permissionValue != null">
+                #{permissionValue,jdbcType=VARCHAR},
+            </if>
+
+        </trim>
+    </insert>
+
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.zypcy.springcloud.dynamicroute.entity.PagePermission">
+        update page_permissions
+        <set>
+            <if test="routeId != null">
+                routeId = #{routeId,jdbcType=VARCHAR},
+            </if>
+            <if test="role != null">
+                role = #{role,jdbcType=VARCHAR},
+            </if>
+            <if test="permissionValue != null">
+                permission_value = #{permissionValue,jdbcType=VARCHAR},
+            </if>
+
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+
+</mapper>

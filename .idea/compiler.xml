@@ -6,18 +6,32 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="gate-client" />
+        <module name="gate-mockserver" />
         <module name="gate-eureka" />
-        <module name="gate-gateway" />
         <module name="gate-service" />
+        <module name="gate-client" />
+        <module name="gate-dynamic-router" />
+        <module name="gate-gateway" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="gate-client" target="1.8" />
       <module name="gate-demo" target="1.8" />
+      <module name="gate-dynamic-router" target="1.8" />
       <module name="gate-eureka" target="1.8" />
       <module name="gate-gateway" target="1.8" />
+      <module name="gate-mockserver" target="1.8" />
       <module name="gate-service" target="1.8" />
     </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="gate-client" options="-parameters" />
+      <module name="gate-dynamic-router" options="-parameters" />
+      <module name="gate-eureka" options="-parameters" />
+      <module name="gate-gateway" options="-parameters" />
+      <module name="gate-mockserver" options="-parameters" />
+      <module name="gate-service" options="-parameters" />
+    </option>
   </component>
 </project>

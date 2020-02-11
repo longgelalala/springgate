@@ -4,8 +4,10 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/gate-client/gate-client.iml" filepath="$PROJECT_DIR$/gate-client/gate-client.iml" />
       <module fileurl="file://$PROJECT_DIR$/gate-demo.iml" filepath="$PROJECT_DIR$/gate-demo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/gate-dynamic-router/gate-dynamic-router.iml" filepath="$PROJECT_DIR$/gate-dynamic-router/gate-dynamic-router.iml" />
       <module fileurl="file://$PROJECT_DIR$/gate-eureka/gate-eureka.iml" filepath="$PROJECT_DIR$/gate-eureka/gate-eureka.iml" />
       <module fileurl="file://$PROJECT_DIR$/gate-gateway/gate-gateway.iml" filepath="$PROJECT_DIR$/gate-gateway/gate-gateway.iml" />
+      <module fileurl="file://$PROJECT_DIR$/gate-mockserver/gate-mockserver.iml" filepath="$PROJECT_DIR$/gate-mockserver/gate-mockserver.iml" />
       <module fileurl="file://$PROJECT_DIR$/gate-service/gate-service.iml" filepath="$PROJECT_DIR$/gate-service/gate-service.iml" />
     </modules>
   </component>

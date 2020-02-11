@@ -20,4 +20,11 @@ public class ClientController {
         map.put("client"," client data");
         return map;
     }
+
+    @GetMapping("/test")
+    public Object testGateWay(){
+        Map<String,String> map =new HashMap<>();
+        map.put("test"," test ");
+        return map;
+    }
 }
