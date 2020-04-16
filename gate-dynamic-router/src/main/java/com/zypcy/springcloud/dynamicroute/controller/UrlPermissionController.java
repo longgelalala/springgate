@@ -13,7 +13,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
+import sun.misc.BASE64Decoder;
 
+import java.io.IOException;
 import java.util.List;
 
 @Controller
@@ -76,12 +78,51 @@ public class UrlPermissionController {
 
     @RequestMapping(value = "/getCurPagePermissons", method = RequestMethod.GET)
     @ResponseBody
-    public String getCurrentPagePermission(String routeId, String role) {
+    public String getCurrentPagePermission(String routeId, String access_token) {
 
+        //TODO 从token解析出来什么角色并返回对应的权限
+        String role = getRole(access_token);
+        System.out.println("role--------"+role);
         PagePermission pagePermission = pagePermissionService.getPagePermissionByRouteIdAndRole(routeId, role);
         if (pagePermission != null && pagePermission.getPermissionValue() != null)
             return pagePermission.getPermissionValue();
         return "权限尚未配置";
+    }
+//
+//    {
+//        alg: "HS256",
+//                typ: "JWT"
+//    }.
+//    {
+//        user_name: "admin",
+//                scope: [
+//        "read",
+//                "write"
+// ],
+//        designer: "zml",
+//                exp: 1584338383,
+//            authorities: [
+//        "ROLE_ADMIN"
+// ],
+//        jti: "b5a7466a-b15d-489a-941c-f07ec3c96572",
+//                client_id: "client"
+//    }.
+
+    private String getRole(String access_token) {
+
+        String[] tokens = access_token.split("\\.");
+        BASE64Decoder decoder = new BASE64Decoder();
+        byte[] bytes = new byte[0];
+        try {
+            bytes = decoder.decodeBuffer(tokens[1]);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        String role = new String(bytes);
+        role = role.substring(role.indexOf("ROLE_") + 5);
+        role = role.substring(0, role.indexOf("\"]"));
+
+        return role;
     }
 
 }
