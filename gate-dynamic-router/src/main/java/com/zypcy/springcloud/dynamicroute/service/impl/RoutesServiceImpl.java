@@ -72,6 +72,8 @@ public class RoutesServiceImpl implements IRoutesService {
             routeDefinition.setUri(gatewayRoute.getRouteUri());
             routeDefinition.setFilters(gatewayRoute.getFilterDefinition());
             routeDefinition.setPredicates(gatewayRoute.getPredicateDefinition());
+            //一开始忘记这个了
+            routeDefinition.setOrder(gatewayRoute.getRouteOrder());
             routeDefinitions.add(routeDefinition);
         }
         return routeDefinitions;
